@@ -1,2 +1,2 @@
 # ff-trivia
-Trivia game build completely using FlutterFlow
+Trivia game built completely using FlutterFlow
