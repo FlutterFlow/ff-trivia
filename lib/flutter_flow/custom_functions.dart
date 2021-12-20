@@ -24,3 +24,8 @@ int calculateNewScore(
 ) {
   return currentScore + (correct ? 1 : -1) * currentValue;
 }
+
+bool isNotNullOrEmpty(String question) {
+  // return whether a string is not null or empty
+  return question != null && question.isNotEmpty;
+}

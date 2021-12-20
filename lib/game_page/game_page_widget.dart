@@ -62,24 +62,14 @@ class _GamePageWidgetState extends State<GamePageWidget> {
             child: Stack(
               children: [
                 if (containerGamesRecord.selectMode ?? true)
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Material(
-                        color: Colors.transparent,
-                        elevation: 6,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(16),
-                            bottomRight: Radius.circular(16),
-                            topLeft: Radius.circular(0),
-                            topRight: Radius.circular(0),
-                          ),
-                        ),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.customColor5,
+                  SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Material(
+                          color: Colors.transparent,
+                          elevation: 6,
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(16),
                               bottomRight: Radius.circular(16),
@@ -87,298 +77,389 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                               topRight: Radius.circular(0),
                             ),
                           ),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(24, 54, 24, 24),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 15, 0, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 5, 0),
-                                        child: Text(
-                                          'Code:',
-                                          style: FlutterFlowTheme.title1,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 8, 0),
-                                        child: Text(
-                                          containerGamesRecord.code.toString(),
-                                          style:
-                                              FlutterFlowTheme.title1.override(
-                                            fontFamily: 'Poppins',
-                                            color:
-                                                FlutterFlowTheme.primaryColor,
-                                            fontSize: 22,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 20, 0, 0),
-                                  child: Text(
-                                    'Players',
-                                    style: FlutterFlowTheme.title2,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 25),
-                                  child: Builder(
-                                    builder: (context) {
-                                      final players = containerGamesRecord.users
-                                              ?.toList() ??
-                                          [];
-                                      return Column(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.customColor5,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(16),
+                                bottomRight: Radius.circular(16),
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(0),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24, 54, 24, 24),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 15, 0, 0),
+                                      child: Row(
                                         mainAxisSize: MainAxisSize.max,
-                                        children: List.generate(players.length,
-                                            (playersIndex) {
-                                          final playersItem =
-                                              players[playersIndex];
-                                          return Padding(
+                                        children: [
+                                          Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    0, 15, 0, 0),
-                                            child: StreamBuilder<UsersRecord>(
-                                              stream: UsersRecord.getDocument(
-                                                  playersItem),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50,
-                                                      height: 50,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        color: FlutterFlowTheme
-                                                            .primaryColor,
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                                final containerUsersRecord =
-                                                    snapshot.data;
-                                                return Container(
-                                                  width: double.infinity,
-                                                  height: 70,
-                                                  decoration: BoxDecoration(
-                                                    color: Color(0xFFEEEEEE),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12),
-                                                    border: Border.all(
-                                                      color: FlutterFlowTheme
-                                                          .customColor1,
-                                                      width: 1,
-                                                    ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                15, 0, 15, 0),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Text(
-                                                          containerUsersRecord
-                                                              .displayName,
-                                                          style:
-                                                              FlutterFlowTheme
-                                                                  .subtitle1
-                                                                  .override(
-                                                            fontFamily:
-                                                                'Poppins',
-                                                            color: FlutterFlowTheme
-                                                                .secondaryColor,
+                                                    0, 0, 5, 0),
+                                            child: Text(
+                                              'Code:',
+                                              style: FlutterFlowTheme.title1,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 8, 0),
+                                            child: Text(
+                                              containerGamesRecord.code
+                                                  .toString(),
+                                              style: FlutterFlowTheme.title1
+                                                  .override(
+                                                fontFamily: 'Poppins',
+                                                color: FlutterFlowTheme
+                                                    .primaryColor,
+                                                fontSize: 22,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 20, 0, 0),
+                                      child: Text(
+                                        'Players',
+                                        style: FlutterFlowTheme.title2,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 0, 25),
+                                      child: Builder(
+                                        builder: (context) {
+                                          final players = containerGamesRecord
+                                                  .users
+                                                  ?.toList() ??
+                                              [];
+                                          return Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: List.generate(
+                                                players.length, (playersIndex) {
+                                              final playersItem =
+                                                  players[playersIndex];
+                                              return Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 15, 0, 0),
+                                                child:
+                                                    StreamBuilder<UsersRecord>(
+                                                  stream:
+                                                      UsersRecord.getDocument(
+                                                          playersItem),
+                                                  builder: (context, snapshot) {
+                                                    // Customize what your widget looks like when it's loading.
+                                                    if (!snapshot.hasData) {
+                                                      return Center(
+                                                        child: SizedBox(
+                                                          width: 50,
+                                                          height: 50,
+                                                          child:
+                                                              CircularProgressIndicator(
+                                                            color:
+                                                                FlutterFlowTheme
+                                                                    .primaryColor,
                                                           ),
                                                         ),
-                                                        if ((containerUsersRecord
-                                                                .reference) ==
-                                                            (containerGamesRecord
-                                                                .selectingUser))
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        7,
-                                                                        0,
-                                                                        0,
-                                                                        0),
-                                                            child: FaIcon(
-                                                              FontAwesomeIcons
-                                                                  .clock,
-                                                              color: FlutterFlowTheme
-                                                                  .secondaryColor,
-                                                              size: 24,
+                                                      );
+                                                    }
+                                                    final containerUsersRecord =
+                                                        snapshot.data;
+                                                    return Container(
+                                                      width: double.infinity,
+                                                      height: 70,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            Color(0xFFEEEEEE),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12),
+                                                        border: Border.all(
+                                                          color:
+                                                              FlutterFlowTheme
+                                                                  .customColor1,
+                                                          width: 1,
+                                                        ),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(15, 0,
+                                                                    15, 0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              containerUsersRecord
+                                                                  .displayName,
+                                                              style:
+                                                                  FlutterFlowTheme
+                                                                      .subtitle1
+                                                                      .override(
+                                                                fontFamily:
+                                                                    'Poppins',
+                                                                color: FlutterFlowTheme
+                                                                    .secondaryColor,
+                                                              ),
                                                             ),
-                                                          ),
-                                                        Expanded(
-                                                          child: StreamBuilder<
-                                                              List<
-                                                                  GameScoresRecord>>(
-                                                            stream:
-                                                                queryGameScoresRecord(
-                                                              queryBuilder: (gameScoresRecord) => gameScoresRecord
-                                                                  .where('user',
-                                                                      isEqualTo:
-                                                                          containerUsersRecord
+                                                            if ((containerUsersRecord
+                                                                    .reference) ==
+                                                                (containerGamesRecord
+                                                                    .selectingUser))
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            7,
+                                                                            0,
+                                                                            0,
+                                                                            0),
+                                                                child: FaIcon(
+                                                                  FontAwesomeIcons
+                                                                      .clock,
+                                                                  color: FlutterFlowTheme
+                                                                      .secondaryColor,
+                                                                  size: 24,
+                                                                ),
+                                                              ),
+                                                            Expanded(
+                                                              child: StreamBuilder<
+                                                                  List<
+                                                                      GameScoresRecord>>(
+                                                                stream:
+                                                                    queryGameScoresRecord(
+                                                                  queryBuilder: (gameScoresRecord) => gameScoresRecord
+                                                                      .where(
+                                                                          'user',
+                                                                          isEqualTo: containerUsersRecord
                                                                               .reference)
-                                                                  .where('game',
-                                                                      isEqualTo:
-                                                                          widget
-                                                                              .gameRef),
-                                                              singleRecord:
-                                                                  true,
-                                                            ),
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              // Customize what your widget looks like when it's loading.
-                                                              if (!snapshot
-                                                                  .hasData) {
-                                                                return Center(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 50,
-                                                                    height: 50,
-                                                                    child:
-                                                                        CircularProgressIndicator(
-                                                                      color: FlutterFlowTheme
-                                                                          .primaryColor,
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              List<GameScoresRecord>
-                                                                  textGameScoresRecordList =
-                                                                  snapshot.data;
-                                                              // Return an empty Container when the document does not exist.
-                                                              if (snapshot.data
-                                                                  .isEmpty) {
-                                                                return Container();
-                                                              }
-                                                              final textGameScoresRecord =
-                                                                  textGameScoresRecordList
+                                                                      .where(
+                                                                          'game',
+                                                                          isEqualTo:
+                                                                              widget.gameRef),
+                                                                  singleRecord:
+                                                                      true,
+                                                                ),
+                                                                builder: (context,
+                                                                    snapshot) {
+                                                                  // Customize what your widget looks like when it's loading.
+                                                                  if (!snapshot
+                                                                      .hasData) {
+                                                                    return Center(
+                                                                      child:
+                                                                          SizedBox(
+                                                                        width:
+                                                                            50,
+                                                                        height:
+                                                                            50,
+                                                                        child:
+                                                                            CircularProgressIndicator(
+                                                                          color:
+                                                                              FlutterFlowTheme.primaryColor,
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                  List<GameScoresRecord>
+                                                                      textGameScoresRecordList =
+                                                                      snapshot
+                                                                          .data;
+                                                                  // Return an empty Container when the document does not exist.
+                                                                  if (snapshot
+                                                                      .data
+                                                                      .isEmpty) {
+                                                                    return Container();
+                                                                  }
+                                                                  final textGameScoresRecord = textGameScoresRecordList
                                                                           .isNotEmpty
                                                                       ? textGameScoresRecordList
                                                                           .first
                                                                       : null;
-                                                              return Text(
-                                                                textGameScoresRecord
-                                                                    .score
-                                                                    .toString(),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .end,
-                                                                style: FlutterFlowTheme
-                                                                    .bodyText1
-                                                                    .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                ),
-                                                              );
-                                                            },
-                                                          ),
+                                                                  return Text(
+                                                                    textGameScoresRecord
+                                                                        .score
+                                                                        .toString(),
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .end,
+                                                                    style: FlutterFlowTheme
+                                                                        .bodyText1
+                                                                        .override(
+                                                                      fontFamily:
+                                                                          'Poppins',
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                    ),
+                                                                  );
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ],
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              );
+                                            }),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    if ((currentUserReference) ==
+                                        (containerGamesRecord.selectingUser))
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 15, 0, 0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor: Colors.white,
+                                              context: context,
+                                              builder: (context) {
+                                                return Padding(
+                                                  padding:
+                                                      MediaQuery.of(context)
+                                                          .viewInsets,
+                                                  child: Container(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.5,
+                                                    child:
+                                                        CategorySelectorWidget(
+                                                      gameRef: widget.gameRef,
                                                     ),
                                                   ),
                                                 );
                                               },
-                                            ),
-                                          );
-                                        }),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                if ((currentUserReference) ==
-                                    (containerGamesRecord.selectingUser))
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 15, 0, 0),
-                                    child: FFButtonWidget(
-                                      onPressed: () async {
-                                        await showModalBottomSheet(
-                                          isScrollControlled: true,
-                                          backgroundColor: Colors.white,
-                                          context: context,
-                                          builder: (context) {
-                                            return Padding(
-                                              padding: MediaQuery.of(context)
-                                                  .viewInsets,
-                                              child: Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.5,
-                                                child: CategorySelectorWidget(
-                                                  gameRef: widget.gameRef,
-                                                ),
-                                              ),
                                             );
                                           },
-                                        );
-                                      },
-                                      text: 'Choose Category',
-                                      options: FFButtonOptions(
-                                        width: double.infinity,
-                                        height: 70,
-                                        color: FlutterFlowTheme.primaryColor,
-                                        textStyle:
-                                            FlutterFlowTheme.subtitle2.override(
-                                          fontFamily: 'Poppins',
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600,
+                                          text: 'Choose Category',
+                                          options: FFButtonOptions(
+                                            width: double.infinity,
+                                            height: 70,
+                                            color:
+                                                FlutterFlowTheme.primaryColor,
+                                            textStyle: FlutterFlowTheme
+                                                .subtitle2
+                                                .override(
+                                              fontFamily: 'Poppins',
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            elevation: 4,
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1,
+                                            ),
+                                            borderRadius: 16,
+                                          ),
                                         ),
-                                        elevation: 4,
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1,
+                                      ),
+                                    Align(
+                                      alignment: AlignmentDirectional(0, 0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 20, 0, 0),
+                                        child: Text(
+                                          'Waiting for selection...',
+                                          style: FlutterFlowTheme.title2,
                                         ),
-                                        borderRadius: 16,
                                       ),
                                     ),
-                                  ),
-                                Align(
-                                  alignment: AlignmentDirectional(0, 0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 20, 0, 0),
-                                    child: Text(
-                                      'Waiting for selection...',
-                                      style: FlutterFlowTheme.title2,
-                                    ),
-                                  ),
+                                    if (functions.isNotNullOrEmpty(
+                                            containerGamesRecord
+                                                .currentQuestion) ??
+                                        true)
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 20, 0, 0),
+                                            child: Text(
+                                              'Last Question',
+                                              style: FlutterFlowTheme.title2
+                                                  .override(
+                                                fontFamily: 'Poppins',
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            containerGamesRecord
+                                                .currentQuestion,
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.title2
+                                                .override(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 20, 0, 0),
+                                            child: Text(
+                                              'Last Answer',
+                                              style: FlutterFlowTheme.title2
+                                                  .override(
+                                                fontFamily: 'Poppins',
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            containerGamesRecord.currentAnswer,
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.title2
+                                                .override(
+                                              fontFamily: 'Poppins',
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 if (containerGamesRecord.questionMode ?? true)
                   Column(
@@ -497,9 +578,6 @@ class _GamePageWidgetState extends State<GamePageWidget> {
                                           'current_value': FieldValue.delete(),
                                           'current_category_name':
                                               FieldValue.delete(),
-                                          'current_question':
-                                              FieldValue.delete(),
-                                          'current_answer': FieldValue.delete(),
                                         };
                                         await widget.gameRef
                                             .update(gamesUpdateData);
